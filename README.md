@@ -2,7 +2,7 @@
 
 A sophisticated AI-powered math tutoring chatbot that provides step-by-step solutions and creates personalized educational videos using Google Veo API.
 
-## 🎯 Features
+## Features
 
 ### Core Capabilities
 - **Multi-Platform Support**: Works on Telegram and WhatsApp

@@ -1,0 +1,32 @@
+# Core dependencies
+python-telegram-bot==20.7
+python-dotenv==1.0.0
+openai==1.12.0
+google-generativeai==0.3.2
+requests==2.31.0
+Pillow==10.2.0
+pytesseract==0.3.10
+
+# WhatsApp integration (alternative to Telegram)
+twilio==8.11.0
+flask==3.0.0
+
+# Logging and utilities
+python-json-logger==2.0.7
+pydantic==2.5.3
+aiohttp==3.9.3
+
+# Math and LaTeX support
+sympy==1.12
+matplotlib==3.8.3
+numpy==1.26.4
+
+# OCR dependencies
+opencv-python==4.9.0.80
+easyocr==1.7.0
+
+# Development dependencies
+pytest==8.0.0
+black==24.1.1
+flake8==7.0.0
+mypy==1.8.0
