@@ -1,55 +1,58 @@
-# Math Tutor Bot with Google Veo Integration
+# Math Tutor Bot 🧮
 
-A sophisticated AI-powered math tutoring chatbot that provides step-by-step solutions and creates personalized educational videos using Google Veo API.
+An AI-powered math tutoring chatbot that provides step-by-step solutions using Google Gemini AI. Built for Telegram with interactive demo questions and OCR support for handwritten problems.
 
-## Features
+## ✨ Features
 
-### Core Capabilities
-- **Multi-Platform Support**: Works on Telegram and WhatsApp
-- **AI-Powered Solutions**: Uses OpenAI GPT or Google Gemini for step-by-step math problem solving
-- **Video Explanations**: Generates educational videos using Google Veo API (with local fallback)
-- **OCR Support**: Extracts math problems from images using Tesseract and EasyOCR
-- **LaTeX Formatting**: Supports mathematical notation and expressions
-- **Conversation Logging**: Tracks interactions for analytics and improvement
+### 🎯 Core Capabilities
+- **AI-Powered Solutions**: Uses Google Gemini for step-by-step math problem solving
+- **Interactive Demo Questions**: Clickable buttons for easy testing
+- **OCR Support**: Extracts math problems from images using Tesseract
+- **Step-by-Step Explanations**: Clear, educational breakdowns for every problem
+- **LaTeX Support**: Proper mathematical notation rendering
+- **Content Filtering**: Ensures educational and appropriate content only
 
-### Advanced Features
-- **Content Filtering**: Ensures educational and appropriate content
-- **Rate Limiting**: Prevents abuse with progressive penalties
-- **Image Processing**: Accepts handwritten or printed math problems via photos
-- **Modular Architecture**: Clean separation of concerns for easy maintenance
+### 🛡️ Safety & Performance
+- **Rate Limiting**: Prevents abuse with intelligent request limiting
 - **Error Handling**: Robust error handling with graceful fallbacks
+- **Conversation Logging**: Tracks interactions for analytics and improvement
+- **Modular Architecture**: Clean, maintainable codebase
 
 ## 🛠 Tech Stack
 
 - **Backend**: Python 3.8+
 - **Bot Framework**: python-telegram-bot
-- **AI Models**: OpenAI GPT-4 / Google Gemini
-- **Video Generation**: Google Veo API / MoviePy (fallback)
-- **OCR**: Tesseract, EasyOCR
-- **Database**: SQLite (configurable)
-- **Image Processing**: OpenCV, PIL
-- **Math Visualization**: Matplotlib, SymPy
+- **AI Model**: Google Gemini Pro
+- **OCR**: Tesseract OCR
+- **Database**: SQLite
+- **Image Processing**: PIL/Pillow
+- **Math Processing**: SymPy (LaTeX support)
 
 ## 📁 Project Structure
 
 ```
 math-tutor/
-├── bot.py                          # Main bot logic and message handling
-├── ai_solver.py                    # AI model integration for problem solving
-├── video_generator.py              # Google Veo API and local video generation
-├── requirements.txt                # Python dependencies
+├── bot.py                          # Main bot logic with interactive demo questions
+├── ai_solver.py                    # Google Gemini AI integration for problem solving
+├── ai_solver_clean.py              # Minimal AI solver alternative
+├── requirements.txt                # Python dependencies (clean, no video libraries)
 ├── .env.example                    # Environment variables template
 ├── README.md                       # This file
 │
 ├── utils/                          # Utility modules
 │   ├── __init__.py
-│   ├── logger.py                   # Logging configuration
-│   ├── content_filter.py           # Content moderation
+│   ├── logger.py                   # Centralized logging system
+│   ├── content_filter.py           # Content moderation and filtering
 │   ├── rate_limiter.py             # Rate limiting and abuse prevention
 │   └── conversation_logger.py      # Conversation tracking and analytics
 │
+├── tests/                          # Test files
+│   ├── test_ai_only.py             # AI solver tests
+│   ├── test_formatting.py          # Message formatting tests
+│   ├── test_bot_commands.py        # Bot functionality tests
+│   └── final_test.py               # Comprehensive test suite
+│
 ├── logs/                           # Log files (created automatically)
-├── generated_videos/               # Generated video files (created automatically)
 └── temp/                           # Temporary files (created automatically)
 ```
 
@@ -59,16 +62,15 @@ math-tutor/
 
 - Python 3.8 or higher
 - Telegram Bot Token (from @BotFather)
-- OpenAI API Key or Google Gemini API Key
-- Google Cloud Project with Veo API access (optional)
-- Tesseract OCR installed on your system
+- Google Gemini API Key
+- Tesseract OCR (for image processing)
 
 ### 2. Installation
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd math-tutor
+git clone https://github.com/asrithcheepurupalli/math-tutor-bot.git
+cd math-tutor-bot
 
 # Create virtual environment
 python -m venv venv
@@ -94,7 +96,7 @@ sudo apt-get install tesseract-ocr
 # Copy environment template
 cp .env.example .env
 
-# Edit .env with your API keys and configuration
+# Edit .env with your API keys
 nano .env
 ```
 
@@ -102,15 +104,17 @@ nano .env
 ```env
 # Bot Configuration
 BOT_TOKEN=your_telegram_bot_token_here
-AI_MODEL_PROVIDER=openai  # or gemini
+AI_MODEL_PROVIDER=gemini
 
-# AI API Keys
-OPENAI_API_KEY=your_openai_api_key_here
+# AI API Key
 GEMINI_API_KEY=your_gemini_api_key_here
 
-# Google Veo (Optional)
-GOOGLE_CLOUD_PROJECT_ID=your_project_id
-GOOGLE_VEO_API_KEY=your_veo_api_key
+# Logging Configuration
+LOG_LEVEL=INFO
+LOG_FILE=math_tutor_bot.log
+
+# Database Configuration
+DATABASE_URL=sqlite:///math_tutor.db
 ```
 
 ### 4. Run the Bot
@@ -126,24 +130,37 @@ The bot will start and begin listening for messages on Telegram.
 
 ### Getting Started
 1. Start a chat with your bot on Telegram
-2. Send `/start` to see the welcome message
-3. Send any math problem as text or image
+2. Send `/start` to see welcome message and demo questions
+3. Click on demo question buttons or type your own math problem
+4. Send photos of handwritten math problems for OCR processing
+
+### Bot Commands
+- `/start` - Welcome message with interactive demo questions
+- `/help` - Show usage instructions and examples  
+- `/about` - Information about the bot and its features
 
 ### Example Interactions
 
+**Demo Questions (Clickable Buttons):**
+- "Solve: 2x + 5 = 15"
+- "Factor: x² - 5x + 6"  
+- "Find derivative of: x³ + 2x² - 5"
+
 **Text Problems:**
 ```
-User: Solve for x: 2x + 5 = 15
-Bot: [Provides step-by-step solution and video explanation]
+User: Solve for x: 3x - 7 = 14
+Bot: 🎯 Solution: x = 7
 
-User: Find the derivative of f(x) = x² + 3x + 2
-Bot: [Shows differentiation steps with visual explanation]
+📋 Step-by-step explanation:
+1. Add 7 to both sides: 3x - 7 + 7 = 14 + 7
+2. Simplify: 3x = 21
+3. Divide both sides by 3: x = 7
 ```
 
 **Image Problems:**
 ```
 User: [Sends photo of handwritten math problem]
-Bot: [Uses OCR to extract text, then solves and creates video]
+Bot: [Uses OCR to extract text, then provides step-by-step solution]
 ```
 
 **Supported Math Topics:**
@@ -164,31 +181,18 @@ Bot: [Uses OCR to extract text, then solves and creates video]
 4. Set bot commands (optional):
    ```
    /setcommands
-   start - Welcome message and introduction
+   start - Welcome message with demo questions
    help - Show help and usage instructions
    about - Information about the bot
    ```
-
-### OpenAI API Setup
-
-1. Visit [OpenAI API](https://platform.openai.com/api-keys)
-2. Create an API key
-3. Add to your `.env` file
 
 ### Google Gemini Setup
 
 1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
 2. Create an API key
-3. Add to your `.env` file
+3. Add `GEMINI_API_KEY=your_key_here` to your `.env` file
 
-### Google Veo API Setup (Optional)
-
-1. Create a Google Cloud Project
-2. Enable the Video Intelligence API
-3. Create a service account and download credentials
-4. Set `GOOGLE_CLOUD_CREDENTIALS_PATH` in `.env`
-
-*Note: Google Veo is still in limited preview. The bot includes a local video generation fallback using MoviePy.*
+*Note: OpenAI integration is available but Gemini is the primary provider for this project.*
 
 ## 🔒 Security Features
 
@@ -247,23 +251,6 @@ COPY . .
 CMD ["python", "bot.py"]
 ```
 
-#### Using systemd (Linux)
-```ini
-[Unit]
-Description=Math Tutor Bot
-After=network.target
-
-[Service]
-Type=simple
-User=mathbot
-WorkingDirectory=/opt/math-tutor
-ExecStart=/opt/math-tutor/venv/bin/python bot.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
 #### Cloud Deployment Options
 - **Heroku**: Use the included `Procfile`
 - **Google Cloud Run**: Containerized deployment
@@ -277,7 +264,7 @@ LOG_LEVEL=INFO
 ENABLE_CONTENT_FILTER=true
 RATE_LIMIT_REQUESTS=10
 RATE_LIMIT_WINDOW=60
-DATABASE_URL=postgresql://user:pass@host:5432/mathtutor
+DATABASE_URL=sqlite:///math_tutor.db
 ```
 
 ## 🤝 Contributing
@@ -306,63 +293,76 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Bot not responding:**
 - Check bot token in `.env`
-- Verify internet connection
-- Check logs for errors
+- Verify internet connection  
+- Check logs for errors: `tail -f math_tutor_bot.log`
 
 **OCR not working:**
-- Ensure Tesseract is installed
-- Check `TESSERACT_PATH` in `.env`
-- Verify image quality
-
-**Video generation failing:**
-- Check Google Veo API credentials
-- Verify MoviePy installation
-- Check disk space in `VIDEO_OUTPUT_DIR`
+- Ensure Tesseract is installed: `tesseract --version`
+- Verify image quality (clear, well-lit photos work best)
+- Check supported image formats (PNG, JPG, WebP)
 
 **AI responses not working:**
-- Verify API keys are correct
-- Check API rate limits
-- Monitor API usage
+- Verify Gemini API key is correct
+- Check API usage limits and quotas
+- Monitor API rate limiting
+
+**Formatting issues:**
+- Bot now uses plain text formatting to avoid Telegram parsing errors
+- Check recent logs for specific error messages
 
 ### Getting Help
 
-1. Check the logs in the `logs/` directory
-2. Review environment variable configuration
-3. Test individual components separately
+1. Check the logs in `math_tutor_bot.log`
+2. Review environment variable configuration in `.env`
+3. Test individual components with the test scripts:
+   - `python test_ai_only.py` - Test AI solver
+   - `python final_test.py` - Comprehensive test
 4. Create an issue on GitHub with error details
 
 ## 🔄 Updates and Maintenance
 
 ### Regular Maintenance
-- Clean up old video files
-- Monitor log file sizes
-- Update dependencies regularly
-- Review rate limiting settings
+- Monitor log file sizes: `ls -lah *.log`
+- Update dependencies regularly: `pip install -r requirements.txt --upgrade`
+- Review rate limiting settings based on usage
+- Clean up temporary files
 
 ### Backup Recommendations
-- Backup conversation database
-- Save configuration files
+- Backup conversation database (`math_tutor.db`)
+- Save configuration files (`.env`)
 - Document custom modifications
 
 ## 📈 Roadmap
 
-### Planned Features
+### Completed Features ✅
+- [x] Google Gemini AI integration
+- [x] Interactive demo questions with clickable buttons
+- [x] OCR support for handwritten problems  
+- [x] Step-by-step solution explanations
+- [x] Robust error handling and message formatting
+- [x] Rate limiting and content filtering
+- [x] Comprehensive test suite
+
+### Planned Features 🚧
 - [ ] WhatsApp integration
 - [ ] Voice message support
 - [ ] Multi-language support
 - [ ] Advanced graphing capabilities
 - [ ] Interactive problem sets
+- [ ] Video explanations (future enhancement)
 - [ ] Teacher dashboard
 - [ ] Student progress tracking
 
 ### Version History
-- **v1.0.0**: Initial release with Telegram support
-- **v1.1.0**: Added Google Veo integration (planned)
+- **v1.0.0**: Initial release with Telegram and Gemini AI
+- **v1.1.0**: Interactive demo questions and improved formatting  
 - **v1.2.0**: WhatsApp support (planned)
+- **v2.0.0**: Video generation re-integration (planned)
 
 ---
 
-**Made with ❤️ for students and educators worldwide**
+**🎓 Made with ❤️ for students and educators worldwide**
 
-For more information, visit our [documentation](docs/) or contact support.
-# math-tutor-bot
+**Repository**: https://github.com/asrithcheepurupalli/math-tutor-bot
+
+For questions or support, please create an issue on GitHub.
