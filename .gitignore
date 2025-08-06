@@ -151,3 +151,4 @@ docker-compose.yml
 *.json
 service-account-*.json
 google-credentials.json
+*.log
