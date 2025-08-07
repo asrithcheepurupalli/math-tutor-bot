@@ -39,11 +39,15 @@ math-tutor/
 ├── .env.example                    # Environment variables template
 ├── README.md                       # This file
 ├── DEPLOYMENT.md                   # 24/7 hosting and deployment guide
+├── CLOUD_DEPLOY.md                 # Quick cloud deployment guide  
+├── deploy_to_cloud.sh              # One-click cloud deployment prep
 ├── start_bot.sh                    # Start bot in background
 ├── stop_bot.sh                     # Stop running bot
 ├── status_bot.sh                   # Check bot status
 ├── auto_restart.sh                 # Monitor and auto-restart bot
 ├── setup_autostart.sh              # Setup auto-start on boot
+├── Dockerfile                      # Docker container configuration
+├── render.yaml                     # Render.com deployment config
 │
 ├── utils/                          # Utility modules
 │   ├── __init__.py
@@ -125,37 +129,33 @@ DATABASE_URL=sqlite:///math_tutor.db
 
 ### 4. Run the Bot
 
+⚠️ **IMPORTANT**: The bot only works on Telegram **while it's running**. If your computer sleeps or shuts down, users won't get responses.
+
+#### 🖥️ **Local Development (Stops when computer sleeps)**
 ```bash
 # Quick start (runs until terminal closes)
 python bot.py
 
-# OR: Start in background (recommended - survives terminal closure)
-./start_bot.sh
-
-# Check if bot is running
-./status_bot.sh
-
-# Stop the bot
-./stop_bot.sh
-
-# View live logs
-tail -f bot_output.log
+# Background operation (survives terminal closure)
+./start_bot.sh          # Start in background
+./status_bot.sh         # Check status  
+./stop_bot.sh           # Stop bot
+./auto_restart.sh       # Monitor and auto-restart
+./setup_autostart.sh    # Auto-start on boot
 ```
 
-⚠️ **IMPORTANT**: The bot only works on Telegram **while it's running**. If you close your computer or the bot stops, users won't get responses until you restart it.
-
-**For True 24/7 Operation:**
+#### ☁️ **CLOUD DEPLOYMENT (Runs 24/7 even when computer sleeps)** ⭐ 
 ```bash
-# Option 1: Auto-restart monitoring (recommended for local)
-./auto_restart.sh        # Keeps bot running and restarts if crashed
+# One-click cloud deployment preparation
+./deploy_to_cloud.sh
 
-# Option 2: Auto-start on boot (survives computer restarts)  
-./setup_autostart.sh     # Sets up automatic startup when you log in
+# Then deploy to any platform:
+# • Render.com (FREE - recommended)
+# • Railway.app (FREE) 
+# • Heroku (FREE with limits)
 ```
 
-The bot will start and begin listening for messages on Telegram 24/7.
-
-> 📖 **For cloud hosting (true 24/7 even when computer is off), see [DEPLOYMENT.md](DEPLOYMENT.md)**
+> � **For 24/7 operation even when your computer sleeps, see [CLOUD_DEPLOY.md](CLOUD_DEPLOY.md)**
 
 ## 📱 Usage
 
@@ -273,13 +273,18 @@ tail -f bot_output.log  # View logs
 ```
 
 ### 24/7 Production Hosting
-For continuous operation, see **[DEPLOYMENT.md](DEPLOYMENT.md)** for detailed guides on:
+For continuous operation **even when your computer sleeps**, see:
 
-- 🆓 **Free Cloud Hosting** (Render, Railway, Heroku)
-- 💰 **VPS Deployment** (DigitalOcean, AWS, etc.)
-- 🐳 **Docker Containers**
-- 🔄 **Auto-restart & Monitoring**
-- 🖥️ **Local Auto-start on Boot**
+- 🚀 **[CLOUD_DEPLOY.md](CLOUD_DEPLOY.md)** - Quick cloud deployment guide
+- 📖 **[DEPLOYMENT.md](DEPLOYMENT.md)** - Comprehensive hosting options
+
+**Free Options:**
+- 🆓 **Render.com** (Recommended - truly free, easy setup)
+- 🆓 **Railway.app** (500 hours/month free)  
+- 🆓 **Heroku** (Limited free tier)
+
+**Paid Options ($5/month):**
+- � **VPS Hosting** (DigitalOcean, Linode, AWS)
 
 ### Production Deployment
 

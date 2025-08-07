@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: math-tutor-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: GEMINI_API_KEY  
+        sync: false
+      - key: AI_MODEL_PROVIDER
+        value: gemini
+      - key: LOG_LEVEL
+        value: INFO
+      - key: DATABASE_URL
+        value: sqlite:///math_tutor.db
