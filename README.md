@@ -42,6 +42,8 @@ math-tutor/
 ├── start_bot.sh                    # Start bot in background
 ├── stop_bot.sh                     # Stop running bot
 ├── status_bot.sh                   # Check bot status
+├── auto_restart.sh                 # Monitor and auto-restart bot
+├── setup_autostart.sh              # Setup auto-start on boot
 │
 ├── utils/                          # Utility modules
 │   ├── __init__.py
@@ -140,9 +142,20 @@ python bot.py
 tail -f bot_output.log
 ```
 
+⚠️ **IMPORTANT**: The bot only works on Telegram **while it's running**. If you close your computer or the bot stops, users won't get responses until you restart it.
+
+**For True 24/7 Operation:**
+```bash
+# Option 1: Auto-restart monitoring (recommended for local)
+./auto_restart.sh        # Keeps bot running and restarts if crashed
+
+# Option 2: Auto-start on boot (survives computer restarts)  
+./setup_autostart.sh     # Sets up automatic startup when you log in
+```
+
 The bot will start and begin listening for messages on Telegram 24/7.
 
-> 📖 **For 24/7 operation and deployment options, see [DEPLOYMENT.md](DEPLOYMENT.md)**
+> 📖 **For cloud hosting (true 24/7 even when computer is off), see [DEPLOYMENT.md](DEPLOYMENT.md)**
 
 ## 📱 Usage
 
