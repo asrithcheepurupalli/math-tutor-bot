@@ -15,6 +15,7 @@ flask==3.0.0
 python-json-logger==2.0.7
 pydantic==2.5.3
 aiohttp==3.9.3
+aiofiles==24.1.0
 
 # Math and LaTeX support
 sympy==1.12
