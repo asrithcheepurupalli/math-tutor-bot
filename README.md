@@ -2,6 +2,10 @@
 
 An AI-powered math tutoring chatbot that provides step-by-step solutions using Google Gemini AI. Built for Telegram with interactive demo questions and OCR support for handwritten problems.
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/asrithcheepurupalli/math-tutor-bot)
+
+**🚀 Quick Deploy:** Run 24/7 even when your computer sleeps! → [CLOUD_DEPLOY.md](CLOUD_DEPLOY.md)
+
 ## ✨ Features
 
 ### 🎯 Core Capabilities
