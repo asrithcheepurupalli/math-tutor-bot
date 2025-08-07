@@ -38,6 +38,10 @@ math-tutor/
 ├── requirements.txt                # Python dependencies (clean, no video libraries)
 ├── .env.example                    # Environment variables template
 ├── README.md                       # This file
+├── DEPLOYMENT.md                   # 24/7 hosting and deployment guide
+├── start_bot.sh                    # Start bot in background
+├── stop_bot.sh                     # Stop running bot
+├── status_bot.sh                   # Check bot status
 │
 ├── utils/                          # Utility modules
 │   ├── __init__.py
@@ -120,11 +124,25 @@ DATABASE_URL=sqlite:///math_tutor.db
 ### 4. Run the Bot
 
 ```bash
-# Start the bot
+# Quick start (runs until terminal closes)
 python bot.py
+
+# OR: Start in background (recommended - survives terminal closure)
+./start_bot.sh
+
+# Check if bot is running
+./status_bot.sh
+
+# Stop the bot
+./stop_bot.sh
+
+# View live logs
+tail -f bot_output.log
 ```
 
-The bot will start and begin listening for messages on Telegram.
+The bot will start and begin listening for messages on Telegram 24/7.
+
+> 📖 **For 24/7 operation and deployment options, see [DEPLOYMENT.md](DEPLOYMENT.md)**
 
 ## 📱 Usage
 
@@ -231,8 +249,24 @@ analytics = await logger.get_analytics(days=30)
 
 ### Local Development
 ```bash
+# Quick start
 python bot.py
+
+# Background operation (recommended)
+./start_bot.sh          # Start in background
+./status_bot.sh         # Check status  
+./stop_bot.sh           # Stop bot
+tail -f bot_output.log  # View logs
 ```
+
+### 24/7 Production Hosting
+For continuous operation, see **[DEPLOYMENT.md](DEPLOYMENT.md)** for detailed guides on:
+
+- 🆓 **Free Cloud Hosting** (Render, Railway, Heroku)
+- 💰 **VPS Deployment** (DigitalOcean, AWS, etc.)
+- 🐳 **Docker Containers**
+- 🔄 **Auto-restart & Monitoring**
+- 🖥️ **Local Auto-start on Boot**
 
 ### Production Deployment
 
