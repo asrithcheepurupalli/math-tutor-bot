@@ -32,6 +32,24 @@ An AI-powered math tutoring chatbot that provides step-by-step solutions using G
 - **Image Processing**: PIL/Pillow
 - **Math Processing**: SymPy (LaTeX support)
 
+## 🔒 Environment Security
+
+**⚠️ IMPORTANT:** Never commit your `.env` file to GitHub!
+
+1. **Copy the example file:**
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Fill in your real API keys in `.env`:**
+   ```bash
+   BOT_TOKEN=your_real_telegram_bot_token_here
+   GEMINI_API_KEY=your_real_google_gemini_api_key_here
+   ```
+
+3. **The `.env` file is already in `.gitignore`** - it won't be pushed to GitHub
+4. **Only `.env.example` with placeholder values** is shared publicly
+
 ## 📁 Project Structure
 
 ```
